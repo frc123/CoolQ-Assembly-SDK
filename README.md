@@ -2,8 +2,6 @@
 
 文档/Documentation：https://github.com/frc123/CoolQ-Assembly-SDK/wiki
 
-Email: frc@xiaorou.net.cn
-
 Email: frc@gmail.com
 
 QQ: 2093003592
