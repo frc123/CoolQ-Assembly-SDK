@@ -1,8 +1,9 @@
 ; CoolQ Assembly SDK
 ; MIT License
 ; Copyright (c) 2020 frc
+; Email: i@frc6.com
 ; Email: frc@xiaorou.net.cn
-; Email: frc@gmail.com
+; Blog: frc6.com
 ; QQ: 2093003592
 ; Documentation: https://github.com/frc123/CoolQ-Assembly-SDK/wiki
 
