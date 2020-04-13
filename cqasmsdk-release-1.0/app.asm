@@ -1,8 +1,9 @@
 ; CoolQ Assembly SDK
 ; MIT License
 ; Copyright (c) 2020 frc
+; Email: i@frc6.com
 ; Email: frc@xiaorou.net.cn
-; Email: frc@gmail.com
+; Blog: frc6.com
 ; QQ: 2093003592
 ; Documentation: https://github.com/frc123/CoolQ-Assembly-SDK/wiki
 
@@ -14,10 +15,10 @@ include		<stdafx.inc>
 		.data?
 lpszAppDirectory	dd	?
 		.const
-szAppID 		db	'com.example.demo',0	;[ÇëĞŞ¸Ä]Ó¦ÓÃµÄAppid
-szMenuAMsgBox	db	'ÕâÀïÊÇmenuA£¬ÔÚÕâÀïÔØÈë´°¿Ú£¬»òÕß½øĞĞÆäËû¹¤×÷¡£',0
-szMenuBMsgBox	db	'ÕâÀïÊÇmenuB£¬ÔÚÕâÀïÔØÈë´°¿Ú£¬»òÕß½øĞĞÆäËû¹¤×÷¡£',0
-szCaption		db	'CoolQ Assembly SDK by ·èÈç³õ',0
+szAppID 		db	'com.example.demo',0	;[è¯·ä¿®æ”¹]åº”ç”¨çš„Appid
+szMenuAMsgBox	db	'è¿™é‡Œæ˜¯menuAï¼Œåœ¨è¿™é‡Œè½½å…¥çª—å£ï¼Œæˆ–è€…è¿›è¡Œå…¶ä»–å·¥ä½œã€‚',0
+szMenuBMsgBox	db	'è¿™é‡Œæ˜¯menuBï¼Œåœ¨è¿™é‡Œè½½å…¥çª—å£ï¼Œæˆ–è€…è¿›è¡Œå…¶ä»–å·¥ä½œã€‚',0
+szCaption		db	'CoolQ Assembly SDK by ç–¯å¦‚åˆ',0
 szOutputGroupList			db	'GroupID:%u(low 32-bit)(Do not worry about high 32-bit unless ID which is bigger than 4294967295?? appear)',0ah,0dh
 							db	'GroupName:%s',0
 szOutputGroupSingleMember1	db	'GroupID:%u(low 32-bit)(Do not worry about high 32-bit unless ID which is bigger than 4294967295 appear)',0ah,0dh
@@ -133,7 +134,7 @@ _menuB						proc
 _menuB						endp
 
 ;Demo1:_retrieveGroupList
-_CQ_getGroupListCallback	proc	,lpstrGroupInfo					;È¡ÈºÁĞ±í-»Øµ÷º¯Êı
+_CQ_getGroupListCallback	proc	,lpstrGroupInfo					;å–ç¾¤åˆ—è¡¨-å›è°ƒå‡½æ•°
 		local	@stGroupStruct:GROUPSTRUCT
 		invoke	_copyData,lpstrGroupInfo,12,addr @stGroupStruct
 		invoke	wsprintf,addr szBuffer,addr szOutputGroupList,@stGroupStruct.dwGroupIDLow,@stGroupStruct.lpGroupName
@@ -143,14 +144,14 @@ _CQ_getGroupListCallback	proc	,lpstrGroupInfo					;È¡ÈºÁĞ±í-»Øµ÷º¯Êı
 		ret
 _CQ_getGroupListCallback	endp
 
-_retrieveGroupList			proc		uses esi ecx				;È¡ÈºÁĞ±í
+_retrieveGroupList			proc		uses esi ecx				;å–ç¾¤åˆ—è¡¨
 		invoke	_CQ_getGroupList,addr _CQ_getGroupListCallback
 		xor		eax,eax
 		ret
 _retrieveGroupList			endp
 
 ;Demo2:_retrieveGroupSingleMember
-_retrieveGroupSingleMember	proc									;È¡Èº³ÉÔ±ĞÅÏ¢
+_retrieveGroupSingleMember	proc									;å–ç¾¤æˆå‘˜ä¿¡æ¯
 		local	@stGroupMemberStruct:GROUPMEMBERSTRUCT
 		invoke	_CQ_getGroupMemberInfo,885904258,0,2093003592,0,addr @stGroupMemberStruct,FALSE
 		invoke	wsprintf,addr szBuffer,addr szOutputGroupSingleMember1,@stGroupMemberStruct.dwGroupIDLow,@stGroupMemberStruct.dwQQIDLow,@stGroupMemberStruct.lpQQName,@stGroupMemberStruct.lpGroupCard,@stGroupMemberStruct.dwGender,@stGroupMemberStruct.dwAge,@stGroupMemberStruct.lpRegion,@stGroupMemberStruct.dwJoinTime,@stGroupMemberStruct.dwLastTime,@stGroupMemberStruct.lpTitle,@stGroupMemberStruct.dwAdmin,@stGroupMemberStruct.dwBadRecord,@stGroupMemberStruct.lpExcluTitle,@stGroupMemberStruct.dwExcluTitleExp
@@ -167,7 +168,7 @@ _retrieveGroupSingleMember	proc									;È¡Èº³ÉÔ±ĞÅÏ¢
 _retrieveGroupSingleMember	endp
 
 ;Demo3:_retrieveGroupMemberList
-_CQ_getGroupMemberListCallback	proc	,lpstrGroupInfo				;È¡Èº³ÉÔ±ÁĞ±í-»Øµ÷º¯Êı
+_CQ_getGroupMemberListCallback	proc	,lpstrGroupInfo				;å–ç¾¤æˆå‘˜åˆ—è¡¨-å›è°ƒå‡½æ•°
 		local	@stGroupMemberStruct:GROUPMEMBERSTRUCT
 		invoke	_copyData,lpstrGroupInfo,68,addr @stGroupMemberStruct
 		invoke	wsprintf,addr szBuffer,addr szOutputGroupSingleMember1,@stGroupMemberStruct.dwGroupIDLow,@stGroupMemberStruct.dwQQIDLow,@stGroupMemberStruct.lpQQName,@stGroupMemberStruct.lpGroupCard,@stGroupMemberStruct.dwGender,@stGroupMemberStruct.dwAge,@stGroupMemberStruct.lpRegion,@stGroupMemberStruct.dwJoinTime,@stGroupMemberStruct.dwLastTime,@stGroupMemberStruct.lpTitle,@stGroupMemberStruct.dwAdmin,@stGroupMemberStruct.dwBadRecord,@stGroupMemberStruct.lpExcluTitle,@stGroupMemberStruct.dwExcluTitleExp
@@ -179,7 +180,7 @@ _CQ_getGroupMemberListCallback	proc	,lpstrGroupInfo				;È¡Èº³ÉÔ±ÁĞ±í-»Øµ÷º¯Êı
 		ret
 _CQ_getGroupMemberListCallback	endp
 
-_retrieveGroupMemberList	proc									;È¡Èº³ÉÔ±ÁĞ±í
+_retrieveGroupMemberList	proc									;å–ç¾¤æˆå‘˜åˆ—è¡¨
 		invoke	_CQ_getGroupMemberList,885904258,0,addr _CQ_getGroupMemberListCallback
 		xor		eax,eax
 		ret
